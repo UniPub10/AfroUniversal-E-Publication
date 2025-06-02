@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment - Universal E-Publications</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff9f1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #5d4531;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .payment-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      text-align: center;
+      width: 320px;
+    }
+    button {
+      background-color: #a65e2e;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #854c22;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-box">
+    <h2>Confirm Purchase</h2>
+    <p id="bookTitle"></p>
+    <p id="bookPrice"></p>
+    <button id="payBtn">Pay Now</button>
+  </div>
+
+  <script>
+    // Books data same as index.html - must sync or move to backend later
+    const books = {
+      "book1": { title: "The Sunlit Savannah", price: 5.99 },
+      "book2": { title: "Echoes of the Drum", price: 6.99 },
+      "book3": { title: "Shadows of the Baobab", price: 4.99 }
+    };
+
+    // Get bookId from URL param
+    const params = new URLSearchParams(window.location.search);
+    const bookId = params.get("bookId");
+
+    const bookTitleEl = document.getElementById("bookTitle");
+    const bookPriceEl = document.getElementById("bookPrice");
+    const payBtn = document.getElementById("payBtn");
+
+    if (!bookId || !books[bookId]) {
+      bookTitleEl.textContent = "Invalid book selection.";
+      payBtn.style.display = "none";
+    } else {
+      bookTitleEl.textContent = `Title: ${books[bookId].title}`;
+      bookPriceEl.textContent = `Price: $${books[bookId].price.toFixed(2)}`;
+    }
+
+    payBtn.onclick = () => {
+      // Simulate payment success
+      alert("Payment successful!");
+      window.location.href = `download.html?bookId=${bookId}`;
+    };
+  </script>
+</body>
+</html>
