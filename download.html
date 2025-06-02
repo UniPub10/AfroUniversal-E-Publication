@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Download - Universal E-Publications</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f3f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #4a3a2a;
+      text-align: center;
+    }
+    .download-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    a.download-link {
+      display: inline-block;
+      margin-top: 25px;
+      background-color: #a65e2e;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    a.download-link:hover {
+      background-color: #854c22;
+    }
+  </style>
+</head>
+<body>
+  <div class="download-box">
+    <h2>Your Download is Ready!</h2>
+    <p id="bookTitle"></p>
+    <a id="downloadLink" class="download-link" href="#" download>Download Ebook</a>
+  </div>
+
+  <script>
+    const books = {
+      "book1": { title: "The Sunlit Savannah", file: "ebooks/the-sunlit-savannah.pdf" },
+      "book2": { title: "Echoes of the Drum", file: "ebooks/echoes-of-the-drum.pdf" },
+      "book3": { title: "Shadows of the Baobab", file: "ebooks/shadows-of-the-baobab.pdf" }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const bookId = params.get("bookId");
+
+    const bookTitleEl = document.getElementById("bookTitle");
+    const downloadLink = document.getElementById("downloadLink");
+
+    if (!bookId || !books[bookId]) {
+      bookTitleEl.textContent = "Invalid download link.";
+      downloadLink.style.display = "none";
+    } else {
+      bookTitleEl.textContent = `Title: ${books[bookId].title}`;
+      downloadLink.href = books[bookId].file;
+    }
+  </script>
+</body>
+</html>
