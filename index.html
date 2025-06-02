@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Universal E-Publications Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #faf8f5;
+      margin: 0; padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4b3b2b;
+    }
+    .store {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+    .book-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      width: 180px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .book-card:hover {
+      transform: scale(1.05);
+    }
+    .book-cover {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .book-info {
+      padding: 10px;
+    }
+    .book-title {
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 10px 0 5px;
+      color: #362c21;
+    }
+    .book-price {
+      color: #a45a32;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Universal E-Publications Store</h1>
+  <div class="store" id="store"></div>
+
+  <script>
+    // Sample books data - update with your own stories
+    const books = [
+      {
+        id: "book1",
+        title: "The Sunlit Savannah",
+        cover: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+        price: 5.99,
+      },
+      {
+        id: "book2",
+        title: "Echoes of the Drum",
+        cover: "https://images.unsplash.com/photo-1532619675605-010d0f0a63b6?auto=format&fit=crop&w=400&q=80",
+        price: 6.99,
+      },
+      {
+        id: "book3",
+        title: "Shadows of the Baobab",
+        cover: "https://images.unsplash.com/photo-1549887533-48b3f3271c13?auto=format&fit=crop&w=400&q=80",
+        price: 4.99,
+      }
+    ];
+
+    const storeDiv = document.getElementById("store");
+
+    function renderBooks() {
+      books.forEach(book => {
+        const bookCard = document.createElement("div");
+        bookCard.className = "book-card";
+        bookCard.innerHTML = `
+          <img class="book-cover" src="${book.cover}" alt="${book.title}" />
+          <div class="book-info">
+            <div class="book-title">${book.title}</div>
+            <div class="book-price">$${book.price.toFixed(2)}</div>
+          </div>
+        `;
+        bookCard.onclick = () => {
+          window.location.href = `payment.html?bookId=${book.id}`;
+        };
+        storeDiv.appendChild(bookCard);
+      });
+    }
+
+    renderBooks();
+  </script>
+</body>
+</html>
